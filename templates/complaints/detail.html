@@ -37,6 +37,9 @@
 							{% csrf_token %}
 							<button type="submit" class="rounded-md bg-blue-600 hover:bg-blue-500 px-3 py-1">{% if request.user in obj.upvotes.all %}Remove Upvote{% else %}Upvote{% endif %}</button>
 						</form>
+						{% if obj.user == request.user or request.user.is_staff %}
+							<a href="{% url 'complaint_edit' obj.pk %}" class="rounded-md bg-green-600 hover:bg-green-500 px-3 py-1">Edit</a>
+						{% endif %}
 					{% else %}
 						<small><a class="text-blue-400 hover:text-blue-300" href="/login/">Login to upvote</a></small>
 					{% endif %}

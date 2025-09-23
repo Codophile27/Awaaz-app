@@ -9,7 +9,7 @@ class PotholeSeverityModel(nn.Module):
         super(PotholeSeverityModel, self).__init__()
         
         # Use ResNet18 as backbone
-        self.backbone = models.resnet18(pretrained=pretrained)
+        self.backbone = models.resnet18(weights='IMAGENET1K_V1' if pretrained else None)
         
         # Remove the final classification layer
         num_features = self.backbone.fc.in_features
@@ -25,3 +25,8 @@ class PotholeSeverityModel(nn.Module):
         
     def forward(self, x):
         return self.backbone(x)
+    
+    @classmethod
+    def create(cls, num_classes=4, pretrained=True):
+        """Factory method to create model instance"""
+        return cls(num_classes=num_classes, pretrained=pretrained)

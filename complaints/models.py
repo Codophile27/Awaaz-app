@@ -22,6 +22,7 @@ class Complaint(models.Model):
 	mongo_file_id = models.CharField(max_length=64, blank=True, default='')
 	public = models.BooleanField(default=True)
 	upvotes = models.ManyToManyField(User, related_name='upvoted_complaints', blank=True)
+	location = models.CharField(max_length=200, blank=True, help_text="Location where the pothole was found")
 
 	def __str__(self) -> str:
 		return f"{self.pk} - {self.predicted_severity} ({self.confidence:.2f})"
