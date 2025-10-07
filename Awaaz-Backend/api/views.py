@@ -188,6 +188,12 @@ class PostComplaintView(APIView):
         complaint.save()
 
         return Response({'success': True, 'id': complaint.pk}, status=status.HTTP_200_OK)
-from django.shortcuts import render
 
-# Create your views here.
+from django.http import JsonResponse
+
+def test_connection(request):
+    return JsonResponse({
+        "status": "success",
+        "message": "✅ Awaaz backend is reachable from your network!"
+    })
+
